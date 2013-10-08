@@ -2,9 +2,12 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 # Implement a DiceSet Class here:
 #
-# class DiceSet
-#   code ...
-# end
+class DiceSet
+  attr_reader :values
+  def roll(size)
+    @values = Array.new(size) { |e| e = rand(1..6) }
+  end
+end
 
 class AboutDiceProject < Neo::Koan
   def test_can_create_a_dice_set
@@ -48,6 +51,13 @@ class AboutDiceProject < Neo::Koan
     # If the rolls are random, then it is possible (although not
     # likely) that two consecutive rolls are equal.  What would be a
     # better way to test this?
+    #
+    # If the goal is to be sure that someone hasn't hardcoded an array
+    # of 5 values, maybe just roll and get it 10 times to see if every
+    # value in every position is the same each time. It's still
+    # possible that a random process could give you the same thing 10
+    # times, but very unlikely. Such is the nature of random: it's
+    # hard to test for.
   end
 
   def test_you_can_roll_different_numbers_of_dice
